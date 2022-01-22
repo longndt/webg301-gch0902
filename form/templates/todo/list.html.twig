@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container col-md-6">
+      <table class="table table-primary" >
+        <thead>
+            <tr>
+                <th>Todo Id</th>
+                <th>Todo Title</th>
+                <th>Todo Content</th>
+                <th>Todo Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+                <tr>
+                    <td>{{ todo.id }}</td>
+                    <td>{{ todo.title }}</td>
+                    <td>{{ todo.content }}</td>
+                    <td>{{ todo.date | date('d/m/Y') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div> 
+{% endblock %}
+
+   

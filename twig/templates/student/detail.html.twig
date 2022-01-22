@@ -1,0 +1,13 @@
+{# kế thừa file template layout #}
+{% extends "layout.html.twig" %}
+
+{# chèn nội dung vào block body #}
+{% block body %}
+   <div class="container text-center">
+      <h2>Mã SV: {{ student.id }} </h2>
+      <h2>Họ tên: {{ student.name }} </h2>
+      <h2>Ngày sinh: {{ student.dob | date('d-m-Y') }} </h2>
+      <h2>Số ĐT: {{ student.mobile }} </h2>
+      <h2>Địa chỉ: {{ student.address }} </h2>
+   </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{# kế thừa file template layout #}
+{% extends "layout.html.twig" %}
+
+{# chèn nội dung vào block body #}
+{% block body %}
+<h4>Get string from controller: </h4>
+    <i>{{ string }}</i>
+    <br>
+    <h4>Get integer from controller: </h4>
+        <i>{{ integer }}</i>
+    <br>
+    <h4>Get array from controller: </h4>
+    {% for a in array %}
+        <p>{{ a }}</p>
+        <br>
+    {% endfor %}
+    {# tạo biến bằng twig #}
+    {% set year = 2022 %}
+    {% set grade = 9.5 %}
+    <h1>We are living in {{ year }}</h1>
+    {# phân loại điểm (Fail, Pass, Merit, Distinction) #}
+    {% if grade >= 8.0 and grade <= 10 %}
+        <h3>Distinction</h3>
+    {% elseif grade >= 7.0 and grade < 8.0 %}
+        <h3>Merit</h3>
+    {% elseif grade >= 6.5 and grade < 7.0 %}
+        <h3>Pass</h3>
+    {% else %}
+        <h3>Fail</h3>
+    {% endif %}
+    {# hiển thị tất cả các số từ 1 đến 20 và chia hết cho 2 #}
+    {% for i in range(1,20) %}
+        {% if i%2 == 0 %}
+            <h4>{{ i }}</h4>
+        {% endif %}
+    {% endfor %}
+    {% set diem = [1,2,3,4,5] %}
+    <h2>Max grade: {{ max(diem) }} </h2>
+    <h2>Min grade: {{ min(diem) }} </h2>
+{% endblock %}
+    

@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-6 text-center">
+   <h3>Title: {{ title }} </h3>
+   <h3>Content: {{ content }} </h3>
+   <h3>Date: {{ date | date('d/m/Y') }} </h3>
+</div>
+{% endblock %}

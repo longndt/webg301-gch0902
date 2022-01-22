@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <div class="container col-md-6">
+      <table class="table table-primary" >
+        <thead>
+            <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Student Dob</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>
+                        <a href="{{ path ('student_detail' , {'id' : student.id }) }}">
+                            {{ student.name }}
+                        </a>         
+                    </td>
+                    <td>{{ student.dob | date('d/m/Y') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div> 
+{% endblock %}
+
+   

@@ -1,0 +1,8 @@
+{% form_theme todoForm 'bootstrap_5_layout.html.twig' %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+   <div class="container col-md-5">
+      {{ form(todoForm) }}
+   </div>
+{% endblock %}
