@@ -2,22 +2,19 @@
 
 {% block body %}
 <div class="container col-md-8 text-center mt-4">
-    <a class="btn btn-success" href="{{ path('genre_add') }}">
-        ADD
-    </a>
-    <table class="table table-bordered mt-3">
+    <table class="table table-bordered">
         <tr>
-            <th>Id</th>
             <th>Genre name</th>
+            <th>Movie list</th>
             <th>Menu</th>
         </tr>
-        {% for genre in genres %}
-            <tr>
-            <td>{{ genre.id }}</td>
+        <tr>
+            <td> {{ genre.name }} </td>
             <td>
-                <a href="{{ path('genre_detail', {'id' : genre.id })}}">
-                    {{ genre.name }}
-                </a>
+                {% for movie in genre.movies %}
+                    {{ movie }}
+                    <br>
+                {% endfor %}
             </td>
             <td>
                 <a class="btn btn-warning" href="{{ path('genre_edit', {'id' : genre.id })}}">
@@ -28,8 +25,6 @@
                 </a>
             </td>
         </tr>
-        {% endfor %}
-        
     </table>
 </div>
 {% endblock %}

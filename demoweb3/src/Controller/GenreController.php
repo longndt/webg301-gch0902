@@ -17,7 +17,7 @@ class GenreController extends AbstractController
         $genre = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render("genre/index.html.twig",
         [
-            'genre' => $genre
+            'genres' => $genre
         ]);
     }
 
@@ -33,8 +33,13 @@ class GenreController extends AbstractController
     #[Route('/delete/{id}', name: 'genre_delete')]
     public function genreDelete($id) {
         $genre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
-        $manager = $this->getDoctrine()->getManager();
-        $manager->remove($genre);
+        //kiểm tra nếu không có movie nào thuộc genre này thì cho phép xóa
+        if (count($genre->getMovies()) == 0) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($genre);
+            $manager->flush();
+        }
+      
         return $this->redirectToRoute("genre_index");
     }
 

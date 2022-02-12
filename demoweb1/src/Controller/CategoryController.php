@@ -41,8 +41,11 @@ class CategoryController extends AbstractController
     $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
     $manager = $this->getDoctrine()->getManager();
 
-    $manager->remove($category);
-    $manager->flush();
+    if (count($category->getProducts())==0) {
+      $manager->remove($category);
+      $manager->flush();
+    }
+
    
     return $this->redirectToRoute("category_index");
   }

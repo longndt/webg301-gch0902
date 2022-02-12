@@ -2,25 +2,25 @@
 
 {% block body %}
 <div class="container col-md-8 text-center mt-4">
-    <a class="btn btn-success" href="{{ path('movie_add') }}">
-        ADD
-    </a>
-    <table class="table table-bordered mt-3">
+    <table class="table table-bordered">
         <tr>
-            <th>Id</th>
             <th>Movie name</th>
             <th>Movie poster</th>
+            <th>Movie genres</th>
+            <th>Movie year</th>
             <th>Menu</th>
         </tr>
-        {% for movie in movies %}
-            <tr>
-                <td>{{ movie.id }}</td>
                 <td>{{ movie.name }} </td>
                 <td>
-                    <a href="{{ path('movie_detail', {'id' : movie.id })}}">
-                        <img src="{{ movie.image }}" width="100" height="100">
-                    </a>
+                    <img src="{{ movie.image }}" width="100" height="100">
                 </td>
+                <td>
+                    {% for genre in movie.genre %}
+                        {{ genre.name }}
+                        <br>
+                    {% endfor %}
+                </td>
+                <td>{{ movie.year }}</td>
                 <td>
                     <a class="btn btn-warning" href="{{ path('movie_edit', {'id' : movie.id })}}">
                         EDIT
@@ -29,9 +29,7 @@
                         DELETE
                     </a>
                 </td>
-            </tr>
-        {% endfor %}
-        
+            </tr>     
     </table>
 </div>
 {% endblock %}
