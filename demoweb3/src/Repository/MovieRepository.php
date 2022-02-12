@@ -19,6 +19,39 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    /**
+     * Movie[]
+     */
+    public function displayAllMovies() {
+        return $this->createQueryBuilder('movie')
+            ->orderBy('movie.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * Movie[]
+     */
+    public function sortByNameAsc() {
+        return $this->createQueryBuilder('movie')
+                    ->orderBy('movie.name', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+
+    /**
+     * Movie[]
+     */
+    public function sortByNameDesc() {
+        return $this->createQueryBuilder('movie')
+                    ->orderBy('movie.name', 'DESC')
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+    
     // /**
     //  * @return Movie[] Returns an array of Movie objects
     //  */

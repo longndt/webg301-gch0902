@@ -8,7 +8,15 @@
     <table class="table table-bordered mt-3">
         <tr>
             <th>Id</th>
-            <th>Movie name</th>
+            <th>   
+            Movie name
+            <a class="text-decoration-none" href="{{ path('sort_name_asc') }}">
+               <img src="{{ asset('images/up.png') }}" width="20" height="20">
+            </a>
+            <a class="text-decoration-none" href="{{ path('sort_name_desc') }}">
+               <img src="{{ asset('images/down.png') }}" width="20" height="20">
+            </a>
+            </th>
             <th>Movie poster</th>
             <th>Menu</th>
         </tr>

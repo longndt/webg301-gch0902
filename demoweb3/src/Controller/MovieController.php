@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\Form\MovieType;
+use App\Repository\MovieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,8 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MovieController extends AbstractController
 {
     #[Route('', name: 'movie_index')]
-    public function movieIndex() {
-        $movie = $this->getDoctrine()->getRepository(Movie::class)->findAll();
+    public function movieIndex(MovieRepository $movieRepository) {
+        //$movie = $this->getDoctrine()->getRepository(Movie::class)->findAll();
+        $movie = $movieRepository->displayAllMovies();
+        
         return $this->render("movie/index.html.twig",
         [
             'movies' => $movie
@@ -71,6 +74,24 @@ class MovieController extends AbstractController
         return $this->renderForm("movie/edit.html.twig",
         [
             'form' => $form
+        ]);
+    }
+
+    #[Route('/asc', name: 'sort_name_asc')]
+    public function sortMovieNameAsc (MovieRepository $movieRepository) {
+        $movie = $movieRepository->sortByNameAsc();
+        return $this->render("movie/index.html.twig",
+        [
+            'movies' => $movie
+        ]);
+    }
+
+    #[Route('/desc', name: 'sort_name_desc')]
+    public function sortMovieNameDesc (MovieRepository $movieRepository) {
+        $movie = $movieRepository->sortByNameDesc();
+        return $this->render("movie/index.html.twig",
+        [
+            'movies' => $movie
         ]);
     }
 }
