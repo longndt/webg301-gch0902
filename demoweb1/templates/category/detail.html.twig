@@ -12,8 +12,10 @@
       <td>{{ category.name }}</td>
       <td> 
         {% for product in category.products %}
-           {{ product.name }}
-           <br>
+          <a href="{{ path('product_detail', {'id': product.id })}}">
+            {{ product.name }}
+          </a> 
+          <br>
         {% endfor %}
       </td>
       <td>

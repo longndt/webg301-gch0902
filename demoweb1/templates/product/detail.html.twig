@@ -14,7 +14,15 @@
       <td>{{ product.name }}</td>
       <td>{{ product.quantity }}</td>
       <td>{{ product.price }} $ </td>
-      <td>{{ product.category.name }} </td>
+      <td>
+         {% if product.category != null %}
+            <a href="{{ path('category_detail', {'id' : product.category.id })}}">
+               {{ product.category.name }} 
+            </a>
+         {% else %}
+            <p>No category</p>
+         {% endif %}
+      </td>
       <td>
             <a class="btn btn-info" href="{{ path('product_detail' , { 'id': product.id }) }}">Detail</a>
             <a class="btn btn-warning" href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>

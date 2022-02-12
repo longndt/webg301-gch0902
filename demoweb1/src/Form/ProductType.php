@@ -24,6 +24,10 @@ class ProductType extends AbstractType
             [
                 'currency' => 'USD'
             ])
+            ->add('image', TextType::class,
+            [
+                'required' => true
+            ])
             ->add('category', EntityType::class,
             [
                 'class' => Category::class,
