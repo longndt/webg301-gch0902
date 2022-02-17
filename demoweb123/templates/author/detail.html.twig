@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-8 mt-4">
+ <div class="row">
+   <div class="col">
+      <img src="{{ author.image }}" width="400" height="400">
+   </div>
+   <div class="col mt-5 text-center">
+      <h1 class="text text-danger">{{ author.name }}</h1>
+      <h2 class="text text-primary">DOB: {{ author.birthday | date('d-m-Y') }}</h2>
+      <h2 class="text text-primary">Nationality: {{ author.nationality }}</h2>
+   </div>
+ </div>
+</div>
+{% endblock %}

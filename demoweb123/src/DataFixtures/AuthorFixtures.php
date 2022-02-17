@@ -15,6 +15,7 @@ class AuthorFixtures extends Fixture
             $author->setName("Author $i");
             $author->setNationality("Vietnam");
             $author->setBirthday(\DateTime::createFromFormat('Y/m/d','1990/05/10'));
+            $author->setImage("http://www.differencebetween.info/sites/default/files/images/4/author.jpg");
             $manager->persist($author);
         }
 
