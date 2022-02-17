@@ -2,6 +2,14 @@
 
 {% block body %}
 <div class="container col-md-5 mt-4 text-center">
+{# nhận message gửi từ controller #}
+{% for flash in app.flashes("Success") %}
+    <p class="alert alert-primary">{{ flash }}</p>
+{% endfor %}
+{% for flash in app.flashes("Error") %}
+    <p class="alert alert-danger">{{ flash }}</p>
+{% endfor %}
+
 <h3 class="text text-primary"> Book List </h3>
 <a class="btn btn-primary" href="">Add new book</a>
 <table class="table table-success mt-3">
