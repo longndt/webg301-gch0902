@@ -24,11 +24,21 @@ class BookController extends AbstractController
 
     #[Route('/detail/{id}', name: 'book_detail')]
     public function bookDetail ($id) {
-        //SELECT * FROM book WHERE id = $id
+        //SELECT * FROM book WHERE id = '$id'
         $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
         return $this->render("book/detail.html.twig",
             [
                 'book' => $book
             ]);
+    }
+
+    #[Route('/delete/{id}', name: 'book_delete')]
+    public function bookDelete ($id) {
+        //DELETE FROM book WHERE id = '$id'
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($book);
+        $manager->flush();
+        return $this->redirectToRoute("book_index");
     }
 }
