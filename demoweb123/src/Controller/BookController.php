@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use Symfony\Component\HttpFoundation\Response;
+use App\Form\BookType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/book')]
 class BookController extends AbstractController
@@ -51,6 +52,56 @@ class BookController extends AbstractController
             $this->addFlash("Success","Delete book succeed !");
         }
         return $this->redirectToRoute("book_index");
+    }
+
+    #[Route('/add', name: 'book_add')]
+    public function bookAdd(Request $request) {
+        //tạo 1 object Book mới
+        $book = new Book;
+        //tạo object cho form 
+        $form = $this->createForm(BookType::class,$book);
+        //form handle request
+        $form->handleRequest($request);
+        //check form submit và form validation
+        if ($form->isSubmitted() && $form->isValid()) {
+            //tạo object cho EntityManager
+            $manager = $this->getDoctrine()->getManager();
+            //add dữ liệu object book vào db
+            $manager->persist($book);
+            //confirm thao tác add dữ liệu
+            $manager->flush();
+            //redirect về trang book index
+            return $this->redirectToRoute("book_index");
+        }
+        return $this->renderForm("book/add.html.twig",
+        [
+            'BookForm' => $form
+        ]);
+    }
+
+    #[Route('/edit/{id}', name: 'book_edit')]
+    public function bookEdit(Request $request, $id) {
+        //lấy object Book theo id từ db
+        $book = $this->getDoctrine()->getRepository(Book::class)->find($id);
+         //tạo object cho form 
+         $form = $this->createForm(BookType::class,$book);
+         //form handle request
+         $form->handleRequest($request);
+         //check form submit và form validation
+         if ($form->isSubmitted() && $form->isValid()) {
+             //tạo object cho EntityManager
+             $manager = $this->getDoctrine()->getManager();
+             //add dữ liệu object book vào db
+             $manager->persist($book);
+             //confirm thao tác edit dữ liệu
+             $manager->flush();
+             //redirect về trang book index
+             return $this->redirectToRoute("book_index");
+         }
+         return $this->renderForm("book/edit.html.twig",
+         [
+             'BookForm' => $form
+         ]);
     }
 }
 
