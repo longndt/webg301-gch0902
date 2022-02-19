@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %} Book List {% endblock %}
+
 {% block body %}
 <div class="container col-md-5 mt-4 text-center">
 {# nhận message gửi từ controller #}
@@ -11,6 +13,11 @@
 {% endfor %}
 
 <h3 class="text text-primary"> Book List </h3>
+<div class="form-group col-md-4 mb-3">
+    <form action="{{ path('book_search') }}" method="POST">
+        <input type="search" class="form-control" name="title" placeholder="Enter book title" required>
+    </form>
+</div>
 <a class="btn btn-primary" href="{{ path('book_add') }}">Add new book</a>
 <table class="table table-success mt-3">
     <thead>

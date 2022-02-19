@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Repository\BookRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 class BookController extends AbstractController
 {
     #[Route('', name: 'book_index')]
-    public function bookIndex () {
+    public function bookIndex (BookRepository $bookRepository) {
         //B1: lấy dữ liệu từ database
         //SELECT * FROM book
-        $book = $this->getDoctrine()->getRepository(Book::class)->findAll();
+        //$book = $this->getDoctrine()->getRepository(Book::class)->findAll();
+        //SELECT * FROM book ORDER BY id DESC
+        $book = $bookRepository->viewBookList();
         //B2: render ra view và gửi kèm dữ liệu
         return $this->render("book/index.html.twig",
             [
@@ -102,6 +105,16 @@ class BookController extends AbstractController
          [
              'BookForm' => $form
          ]);
+    }
+
+    #[Route('/search', name: 'book_search')]
+    public function bookSearch (Request $request,  BookRepository $bookRepository) {
+        $title = $request->get("title");
+        $book = $bookRepository->searchBook($title);
+        return $this->render("book/index.html.twig",
+            [
+                'books' => $book
+            ]);
     }
 }
 

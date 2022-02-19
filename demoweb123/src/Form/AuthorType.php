@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AuthorType extends AbstractType
 {
@@ -29,7 +31,19 @@ class AuthorType extends AbstractType
                 'required' => true,
                 'widget' => 'single_text'
             ])
-            ->add('nationality')
+            ->add('nationality', ChoiceType::class,
+            [
+                'label' => 'Author Nationality',
+                'required' => true,
+                //hiển thị list có sẵn cho người dùng chọn
+                'choices' => [
+                    'Vietnam' => 'Vietnam',
+                    'Thailand' => 'Thailand',
+                    'Singapore' => 'Singapore'
+                ],
+                'expanded' => true //radio button
+                //default : expanded = false => drop-down list
+            ])
             ->add('image')
             ->add('OK', SubmitType::class)
         ;

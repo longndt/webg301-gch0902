@@ -10,6 +10,13 @@
       <h1 class="text text-danger">{{ author.name }}</h1>
       <h2 class="text text-primary">DOB: {{ author.birthday | date('d-m-Y') }}</h2>
       <h2 class="text text-primary">Nationality: {{ author.nationality }}</h2>
+      <h2 class="text text-primary">Books:
+         {% for book in author.books %}
+            <a class="text-decoration-none" href="{{ path('book_detail', {'id' : book.id })}}">
+               <h5 class="text text-success">{{ book.title }} </h5>
+            </a>
+         {% endfor %}          
+      </h2>
    </div>
  </div>
 </div>

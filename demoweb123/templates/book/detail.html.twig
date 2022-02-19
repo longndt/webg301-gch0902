@@ -10,6 +10,13 @@
       <h1 class="text text-danger">{{ book.title }}</h1>
       <h2 class="text text-primary">Price: {{ book.price }} VND</h2>
       <h2 class="text text-primary">Published Year: {{ book.year }}</h2>
+      <h2 class="text text-primary">Authors:
+         {% for author in book.authors %}
+            <a class="text-decoration-none" href="{{ path('author_detail', {'id' : author.id })}}">
+               <h5 class="text text-success">{{ author.name }} </h5>
+            </a>
+         {% endfor %}          
+      </h2>
    </div>
  </div>
 </div>
