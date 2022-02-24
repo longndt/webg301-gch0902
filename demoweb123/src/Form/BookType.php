@@ -6,9 +6,11 @@ use App\Entity\Author;
 use App\Entity\Book;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +28,14 @@ class BookType extends AbstractType
                     'min' => 2000
                 ]
             ])
-            ->add('image')
+            ->add('image', FileType::class,
+            [
+                'data_class' => null,
+                'label' => 'Cover',
+                'required' => is_null ($builder->getData()->getImage())
+                //image = null => required = true
+                //image != null => required = false
+            ])
             ->add('price', MoneyType::class,
             [
                 'label' => 'Book Price',

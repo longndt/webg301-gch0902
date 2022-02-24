@@ -64,15 +64,21 @@ class Book
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage() 
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image) 
     {
-        $this->image = $image;
-
+        /* nếu người dùng update ảnh mới cho book
+        thì cần set giá trị mới cho biến $image
+        ngược lại thì bỏ qua việc set giá trị và
+        giữ nguyên giá trị hiện tại của biến $image
+        => giữ lại ảnh cũ */
+        if ($image != null) {
+            $this->image = $image;
+        }
         return $this;
     }
 

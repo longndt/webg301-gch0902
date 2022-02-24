@@ -4,7 +4,7 @@
 <div class="container col-md-8 mt-4">
  <div class="row">
    <div class="col">
-      <img src="{{ book.image }}" width="400" height="400">
+      <img src="{{ asset('images/books/'~book.image) }}" width="400" height="400">
    </div>
    <div class="col mt-5 text-center">
       <h1 class="text text-danger">{{ book.title }}</h1>
