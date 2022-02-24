@@ -18,7 +18,31 @@
         <input type="search" class="form-control" name="title" placeholder="Enter book title" required>
     </form>
 </div>
+{% if is_granted('ROLE_ADMIN') %}
 <a class="btn btn-primary" href="{{ path('book_add') }}">Add new book</a>
+<table class="table table-success mt-3">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Book Cover</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>
+                <a href="{{ path('book_detail' , {'id' : book.id }) }}">
+                    <img src="{{ asset('images/books/'~book.image) }}" width="100" height="100">
+                </a>
+            </td>
+        </tr>
+    {% endfor %} 
+    </tbody>
+</table>
+{% elseif is_granted('ROLE_STAFF') %}
 <table class="table table-success mt-3">
     <thead>
         <tr>
@@ -40,15 +64,41 @@
             </td>
             <td>
                 <a class="btn btn-warning" href="{{ path('book_edit' , {'id' : book.id }) }}">Edit</a>
+                {% if is_granted('ROLE_STAFF') %}
                 <a class="btn btn-danger" href="{{ path('book_delete' , {'id' : book.id }) }}"
                 onclick="return confirm('Do you want to delete this book ?');"
                 >
                 Delete</a>
+                {% endif %}
             </td>
         </tr>
     {% endfor %} 
     </tbody>
 </table>
+{% elseif is_granted('ROLE_USER') %}
+<table class="table table-success mt-3">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Book Cover</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>
+                <a href="{{ path('book_detail' , {'id' : book.id }) }}">
+                    <img src="{{ asset('images/books/'~book.image) }}" width="100" height="100">
+                </a>
+            </td>
+        </tr>
+    {% endfor %} 
+    </tbody>
+</table>
+{% endif %}
 </div>
 {% endblock %}
 

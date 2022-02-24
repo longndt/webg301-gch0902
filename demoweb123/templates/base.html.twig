@@ -16,17 +16,22 @@
     </head>
     <body>
         {# navigation bar #}
-        <ul class="nav justify-content-center|justify-content-end">
-            <h2><li class="nav-item">
-                <a class="nav-link" href="{{ path('home')}}">Home</a>
-            </li></h2>
-            <h2><li class="nav-item">
-                <a class="nav-link" href="{{ path('book_index')}}">Book</a>
-            </li></h2>
-            <h2><li class="nav-item">
-                <a class="nav-link" href="{{ path('author_index')}}">Author</a>
-            </li></h2>
-        </ul>
+        {% block nav %}
+            <ul class="nav justify-content-center|justify-content-end">
+                <h2><li class="nav-item">
+                    <a class="nav-link" href="{{ path('home')}}">Home</a>
+                </li></h2>
+                <h2><li class="nav-item">
+                    <a class="nav-link" href="{{ path('book_index')}}">Book</a>
+                </li></h2>
+                <h2><li class="nav-item">
+                    <a class="nav-link" href="{{ path('author_index')}}">Author</a>
+                </li></h2>
+                <h2><i><li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout')}}">Logout</a>
+                </li></i></h2>
+            </ul>
+        {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>

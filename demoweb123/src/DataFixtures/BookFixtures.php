@@ -15,7 +15,7 @@ class BookFixtures extends Fixture
             $book->setTitle("Programming $i");
             $book->setPrice((float)(rand(10,50)));
             $book->setYear(rand(2010, 2022));
-            $book->setImage("https://arabicvision.com/wp-content/uploads/2015/08/book2.jpg");
+            $book->setImage("book.jpg");
             $manager->persist($book);
         }
 

@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use function PHPUnit\Framework\throwException;
 
@@ -43,6 +44,9 @@ class BookController extends AbstractController
             ]);
     }
 
+     /** 
+     * @IsGranted("ROLE_STAFF")
+     */  
     #[Route('/delete/{id}', name: 'book_delete')]
     public function bookDelete ($id) {
         //DELETE FROM book WHERE id = '$id'
@@ -60,6 +64,9 @@ class BookController extends AbstractController
         return $this->redirectToRoute("book_index");
     }
 
+    /** 
+     * @IsGranted("ROLE_ADMIN")
+     */    
     #[Route('/add', name: 'book_add')]
     public function bookAdd(Request $request) {
         //tạo 1 object Book mới
@@ -106,6 +113,9 @@ class BookController extends AbstractController
         ]);
     }
 
+    /** 
+     * @IsGranted("ROLE_STAFF")
+     */ 
     #[Route('/edit/{id}', name: 'book_edit')]
     public function bookEdit(Request $request, $id) {
         //lấy object Book theo id từ db
